@@ -7,8 +7,6 @@ import urlRouter from "./routes/url.route.js";
 const port = process.env.PORT || 5000;
 
 dotenv.config()
-// Connecting to the database
-connectDB();
 
 const app = express();
 
@@ -41,6 +39,11 @@ app.get("/:shortURL", async (req, res) => {
 });
 
 
-app.listen(port, () => {
-    console.log(`Server listening on port : ${port}`);
-});
+// Connecting to the database
+connectDB();
+
+mongoose.connection.on("open", () => {
+    app.listen(port, () => {
+        console.log(`Server listening on port : ${port}`);
+    });
+})
