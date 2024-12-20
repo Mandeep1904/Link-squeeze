@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import connectDB from './connectDB.js';
 import URL from './models/url.model.js';
 import urlRouter from "./routes/url.route.js";
+import mongoose from "mongoose"
 
 const port = process.env.PORT || 5000;
 
