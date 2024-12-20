@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="url"] {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #shortened-url {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #007BFF;
+        }
+    </style>
+    <script>
+        function updateLengthDisplay(value) {
+            document.getElementById('length-display').textContent = value;
+        }
+    </script>
+</head>
+<body>
+    <h1>Link Squeeze - URL Shortener</h1>
+    <form id="url-form" method="post" action="/url">
+        <div class="form-group">
+            <label for="url">Enter URL to Shorten:</label>
+            <input type="url" id="url" name="url" required>
+        </div>
+        <div class="form-group">
+            <label for="length">Short URL Length: <span id="length-display">8</span></label>
+            <input type="range" id="length" name="length" min="4" max="15" value="8" oninput="updateLengthDisplay(this.value)">
+        </div>
+        <button type="submit">Shorten URL</button>
+    </form>
+
+    <div id="shortened-url">
+        <% if (shortURL) { %>
+        <p>Your shortened URL is: <a href="<%= shortURL %>"><%= shortURL %></a></p>
+        <% } %>
+    </div>
+</body>
+</html>
