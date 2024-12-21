@@ -24,12 +24,9 @@ const handleGenerateURL = async (req, res) => {
 
 const handleGetAnalytics = async (req, res) => {
     try {
-        const result = await URL.find({}); // Fetch all documents
-        if (result.length > 0) {
-            // Pass the entire result array to the EJS template
+        const result = await URL.find({});
             res.render("AllURLsAnalytics", { urls: result });
         } else {
-            // Handle the case when no records are found
             res.render("Error", { Error: "No Short URLs created yet" });
         }
     } catch (error) {
