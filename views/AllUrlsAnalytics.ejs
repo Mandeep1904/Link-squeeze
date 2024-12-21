@@ -6,12 +6,28 @@
         <title>All Short URLs</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <style>
+            .redirect-url {
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                max-width: 300px;
+            }
+            #go-back {
+                margin-top: 15px;
+                padding: 10px 20px;
+                font-size: 16px;
+                cursor: pointer;
+                background-color: #007BFF;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+            }
+        </style>
     </head>
     <body class="bg-gray-100 text-gray-900">
         <div class="container mx-auto p-6">
             <h1 class="text-2xl font-bold mb-4 text-center">All Short URLs</h1>
-            <table
-                class="table-auto w-full bg-white rounded-lg shadow-md overflow-hidden">
+            <table class="table-auto w-full bg-white rounded-lg shadow-md overflow-hidden">
                 <thead class="bg-gray-200">
                     <tr>
                         <th class="px-4 py-2 text-left">No.</th>
@@ -26,27 +42,22 @@
                     <tbody id="url-table-body">
                         <% if (urls && urls.length > 0) { %>
                             <% urls.forEach((url, index) => { %>
-                            <tr class="border-b hover:bg-gray-100"
-                                id="row-<%= url._id %>">
+                            <tr class="border-b hover:bg-gray-100" id="row-<%= url._id %>">
                                 <td class="px-4 py-2"><%= index + 1 %></td>
                                 <td class="px-4 py-2 text-blue-500">
-                                    <a href="/<%= url.shortURL %>" target="_blank"
-                                        class="underline">
+                                    <a href="/<%= url.shortURL %>" target="_blank" class="underline">
                                         <%= url.shortURL %>
                                     </a>
                                 </td>
-                                <td class="px-4 py-2">
-                                    <a href="<%= url.redirectURL %>" target="_blank"
-                                        class="text-blue-500 underline">
+                                <td class="px-4 py-2 redirect-url">
+                                    <a href="<%= url.redirectURL %>" target="_blank" class="text-blue-500 underline">
                                         <%= url.redirectURL %>
                                     </a>
                                 </td>
                                 <td class="px-4 py-2"><%= url.visitedHistory.length %></td>
                                 <td class="px-4 py-2"><%= new Date(url.createdAt).toLocaleString() %></td>
                                 <td class="px-4 py-2">
-                                    <button
-                                        class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 delete-btn"
-                                        data-id="<%= url._id %>"> Delete </button>
+                                    <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 delete-btn" data-id="<%= url._id %>"> Delete </button>
                                 </td>
                             </tr>
                             <% }); %>
@@ -63,9 +74,12 @@
                 <% } %>
                 
             </table>
+
+            <a href="/">
+                <button type="button" id="go-back">Go Back</button>
+            </a>
         </div>
         <script>
-
         // Handle Delete Button Click
         document.querySelectorAll('.delete-btn').forEach(button => {
             button.addEventListener('click', async (e) => {
