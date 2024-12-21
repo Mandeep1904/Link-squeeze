@@ -10,7 +10,8 @@
     <body class="bg-gray-100 text-gray-900">
         <div class="container mx-auto p-6">
             <h1 class="text-2xl font-bold mb-4 text-center">All Short URLs</h1>
-            <table class="table-auto w-full bg-white rounded-lg shadow-md overflow-hidden">
+            <table
+                class="table-auto w-full bg-white rounded-lg shadow-md overflow-hidden">
                 <thead class="bg-gray-200">
                     <tr>
                         <th class="px-4 py-2 text-left">No.</th>
@@ -21,36 +22,46 @@
                         <th class="px-4 py-2 text-left">Actions</th>
                     </tr>
                 </thead>
-                <tbody id="url-table-body">
-                    <% if (urls && urls.length > 0) { %>
-                    <% urls.forEach((url, index) => { %>
-                    <tr class="border-b hover:bg-gray-100"
-                        id="row-<%= url._id %>">
-                        <td class="px-4 py-2"><%= index + 1 %></td>
-                        <td class="px-4 py-2 text-blue-500">
-                            <a href="/<%= url.shortURL %>" target="_blank" class="underline">
-                                <%= url.shortURL %>
-                            </a>
-                        </td>
-                        <td class="px-4 py-2">
-                            <a href="<%= url.redirectURL %>" target="_blank"
-                                class="text-blue-500 underline">
-                                <%= url.redirectURL %>
-                            </a>
-                        </td>
-                        <td class="px-4 py-2"><%= url.visitedHistory.length %></td>
-                        <td class="px-4 py-2"><%= new Date(url.createdAt).toLocaleString() %></td>
-                        <td class="px-4 py-2">
-                            <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 delete-btn" data-id="<%= url._id %>"> Delete </button>
-                        </td>
-                    </tr>
-                    <% }); %>
-                    <% } else { %>
+                <% if (urls) { %>
+                    <tbody id="url-table-body">
+                        <% if (urls && urls.length > 0) { %>
+                            <% urls.forEach((url, index) => { %>
+                            <tr class="border-b hover:bg-gray-100"
+                                id="row-<%= url._id %>">
+                                <td class="px-4 py-2"><%= index + 1 %></td>
+                                <td class="px-4 py-2 text-blue-500">
+                                    <a href="/<%= url.shortURL %>" target="_blank"
+                                        class="underline">
+                                        <%= url.shortURL %>
+                                    </a>
+                                </td>
+                                <td class="px-4 py-2">
+                                    <a href="<%= url.redirectURL %>" target="_blank"
+                                        class="text-blue-500 underline">
+                                        <%= url.redirectURL %>
+                                    </a>
+                                </td>
+                                <td class="px-4 py-2"><%= url.visitedHistory.length %></td>
+                                <td class="px-4 py-2"><%= new Date(url.createdAt).toLocaleString() %></td>
+                                <td class="px-4 py-2">
+                                    <button
+                                        class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 delete-btn"
+                                        data-id="<%= url._id %>"> Delete </button>
+                                </td>
+                            </tr>
+                            <% }); %>
+                        <% } else { %>
+                            <tr>
+                                <td colspan="6" class="px-4 py-2 text-center text-gray-500">No URLs found</td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                <% } else { %>
                     <tr>
                         <td colspan="6" class="px-4 py-2 text-center text-gray-500">No URLs found</td>
                     </tr>
-                    <% } %>
-                </tbody>
+                <% } %>
+                
             </table>
         </div>
         <script>

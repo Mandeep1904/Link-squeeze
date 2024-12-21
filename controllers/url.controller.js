@@ -25,15 +25,13 @@ const handleGenerateURL = async (req, res) => {
 const handleGetAnalytics = async (req, res) => {
     try {
         const result = await URL.find({});
-            res.render("AllURLsAnalytics", { urls: result });
-        } else {
-            res.render("Error", { Error: "No Short URLs created yet" });
-        }
+        res.render("AllURLsAnalytics", { urls: result });
+
     } catch (error) {
         console.error(error);
         res.render("Error", { Error: "An error occurred while fetching URLs." });
     }
-};
+}
 
 const handleDeleteURL = async (req, res) => {
     const { id } = req.params;
