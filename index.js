@@ -22,7 +22,6 @@ app.get("/", (req, res) => {
 
 app.use("/url", urlRouter)
 
-
 app.get("/:shortURL", async (req, res) => {
     const shortURL = req.params.shortURL;
     const entry = await URL.findOneAndUpdate({ shortURL }, {

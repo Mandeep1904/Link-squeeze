@@ -23,13 +23,34 @@ const handleGenerateURL = async (req, res) => {
 }
 
 const handleGetAnalytics = async (req, res) => {
-    const shortURL = req.params.shortURL;
-    const result = await URL.findOne({ shortURL })
-    if(result){
-        return res.render("Analytics", { TotalCounts: result.visitedHistory.length, analytics: result.visitedHistory, shortURLName: shortURL })
-    }else{
-        return res.render("Error", { Error: "This Short URL doesn't exist"})
+    try {
+        const result = await URL.find({}); // Fetch all documents
+        if (result.length > 0) {
+            // Pass the entire result array to the EJS template
+            res.render("AllURLsAnalytics", { urls: result });
+        } else {
+            // Handle the case when no records are found
+            res.render("Error", { Error: "No Short URLs created yet" });
+        }
+    } catch (error) {
+        console.error(error);
+        res.render("Error", { Error: "An error occurred while fetching URLs." });
     }
-}
+};
 
-export { handleGenerateURL, handleGetAnalytics }
+const handleDeleteURL = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const result = await URL.findByIdAndDelete(id);
+
+        if (result) {
+            res.status(200).send({ success: true });
+        } else {
+            res.status(404).send({ success: false, message: "URL not found" });
+        }
+    } catch (error) {
+        res.status(500).send({ success: false, message: "Server error" });
+    }
+};
+
+export { handleGenerateURL, handleGetAnalytics, handleDeleteURL }

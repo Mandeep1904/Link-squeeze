@@ -1,0 +1,86 @@
+{
+	"info": {
+		"_postman_id": "e2ff4e0e-193e-4ba8-9ad4-2cb618bc29ac",
+		"name": "Link-squeeze",
+		"description": "##### Link-squeeze :\n\n- Creates short URL of the actual longer URLs\n    \n- Tech Packages used :\n    \n\n1. Node Js\n    \n2. Express Js\n    \n3. MongoDB\n    \n4. NanoID\n    \n5. SweetAlert2\n    \n6. Tailwind\n    \n7. EJS Template Engine",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "35282695"
+	},
+	"item": [
+		{
+			"name": "Index Page",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:5000/",
+				"description": "<img src=\"https://content.pstmn.io/80055b75-a701-40d7-8e2d-b3efa5add78d/aW1hZ2UucG5n\" alt=\"Index%20Page\" width=\"1499\" height=\"681\">\n\nViewing the index page to enter the URL"
+			},
+			"response": []
+		},
+		{
+			"name": "Creating a short URL",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "url",
+							"value": "https://yyyyyyy.info",
+							"type": "text"
+						},
+						{
+							"key": "length",
+							"value": "4",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:5000/url/",
+				"description": "Creating a short url by entering the long url and by giving the number of letters for generating the short url\n\nfor example :\n\nurl : [https://youtube.com](https://youtube.com)\n\nlength : 4"
+			},
+			"response": []
+		},
+		{
+			"name": "Accessing the Actual URL by short URL",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:5000/{{shortURL}}",
+				"description": "This will open the actual redirectURL"
+			},
+			"response": []
+		},
+		{
+			"name": "URL Analytics",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:5000/url/analytics",
+				"description": "Analytics Page that shows the short URL, Redirect URL & No. of clicks, its creation date and has a delete button to delete the record\n\n<img src=\"https://content.pstmn.io/80769db0-70aa-4e37-b0f8-c7b237e2fbf8/U2NyZWVuc2hvdCAyMDI0LTEyLTIxIDE2MjA1My5wbmc=\" alt=\"\">"
+			},
+			"response": []
+		},
+		{
+			"name": "Deleting the Short URL",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": "http://localhost:5000/url/delete-url/676689ed774f2d04c28f32ac",
+				"description": "<img src=\"https://content.pstmn.io/0b88c050-649d-406a-ab4f-b1c4a29c4dda/U2NyZWVuc2hvdCAyMDI0LTEyLTIxIDE2MjYyNS5wbmc=\" alt=\"Asking%20for%20deletion\">\n\n<img src=\"https://content.pstmn.io/2d97c203-120b-4914-83d9-c2c9ef0629f3/U2NyZWVuc2hvdCAyMDI0LTEyLTIxIDE2MjY0MS5wbmc=\" alt=\"Deletion%20succesful%20message\">"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "shortURL",
+			"value": "QTq0mc"
+		}
+	]
+}
