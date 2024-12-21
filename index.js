@@ -42,8 +42,6 @@ app.get("/:shortURL", async (req, res) => {
 // Connecting to the database
 connectDB();
 
-mongoose.connection.on("open", () => {
-    app.listen(port, () => {
-        console.log(`Server listening on port : ${port}`);
-    });
-})
+app.listen(port, () => {
+    console.log(`Server listening on port : ${port}`);
+});
