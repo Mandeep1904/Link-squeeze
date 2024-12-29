@@ -6,6 +6,11 @@ import urlRouter from "./routes/url.route.js";
 import mongoose from "mongoose";
 import path from "path";
 import cors from 'cors';
+import { fileURLToPath } from 'url';
+
+// Define __dirname for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const port = process.env.PORT || 5000;
 
