@@ -3,8 +3,9 @@ import dotenv from "dotenv";
 import connectDB from './connectDB.js';
 import URL from './models/url.model.js';
 import urlRouter from "./routes/url.route.js";
-import mongoose from "mongoose"
-import cors from 'cors'
+import mongoose from "mongoose";
+import path from "path";
+import cors from 'cors';
 
 const port = process.env.PORT || 5000;
 
