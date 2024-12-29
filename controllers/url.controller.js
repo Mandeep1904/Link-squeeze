@@ -25,7 +25,7 @@ const handleGenerateURL = async (req, res) => {
 const handleGetAnalytics = async (req, res) => {
     try {
         const result = await URL.find({});
-        res.render("AllURLsAnalytics", { urls: result });
+        res.render("AllUrlsAnalytics", { urls: result });
 
     } catch (error) {
         console.error(error);
